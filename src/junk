@@ -1,0 +1,149 @@
+{
+    "instancees": [
+        {
+            "start": "2020-03-24 19:00:00",
+            "target": [
+                550.4446621009413,
+                542.5574614007012,
+                537.200406688908,
+                551.3879659908399,
+                567.4121071251199,
+                564.0067672116851,
+                574.1801515169528,
+                578.8780515940209,
+                571.6737760392689,
+                593.252794462415,
+                609.6674839352705,
+                639.9203190708027,
+                623.1824126574409,
+                626.0069236598447,
+                598.1328382125765,
+                634.0617871857042,
+                628.2477803531921,
+                603.8649612651042,
+                604.5289315771976,
+                583.4151220779702,
+                596.5432120503223,
+                563.6386526751008,
+                598.3861419158354,
+                594.745776567185,
+                568.4409589915635,
+                577.5360512476359,
+                554.7894263900482,
+                566.4163745738958,
+                561.7194592992189,
+                605.8773487473969,
+                588.2348363975743,
+                614.4057862403904,
+                628.6913917462725,
+                610.0155434063804,
+                607.221544467506,
+                623.0083964394358,
+                630.525039626656,
+                627.2779446074968,
+                682.5633052489189,
+                680.5180408385357,
+                621.9842211534689,
+                662.9851069419735,
+                608.8100286717794,
+                607.9982769605256,
+                628.0039755576144,
+                588.7686961501634,
+                588.922711245941,
+                586.1121189831515,
+                588.295165009695,
+                566.8036156262848,
+                576.8464521239456,
+                596.0187278488946,
+                619.9556476868975,
+                594.8764018170316,
+                581.9329621157983,
+                629.8249779754601,
+                631.6468726609411,
+                633.3580836497982,
+                669.7719844545716,
+                633.0947404425259,
+                640.3800657657856,
+                663.4529318243983,
+                705.721287790613,
+                660.662669058166,
+                649.2376097668708,
+                697.1444013872326,
+                683.9927739631087,
+                649.0648529662768,
+                617.3371021019399,
+                620.5768342969074,
+                594.1283555642042,
+                593.004280208547,
+                629.117274243888,
+                603.4930112324165,
+                580.8782392654497,
+                612.9252456680138,
+                592.1979141602867,
+                609.96413403093,
+                638.9058311030868,
+                611.1393280686793,
+                625.6309964654344,
+                674.255349435855,
+                693.15010962897,
+                650.1755792997621,
+                712.1530515329382,
+                689.26259948717,
+                673.9317049454414,
+                678.8261080695579,
+                720.618197214582,
+                690.6089261126333,
+                649.9344344055775,
+                687.9113142904378,
+                641.2785014796337,
+                633.067200424498,
+                628.782744496313,
+                649.7239436858704,
+                613.444932918735,
+                638.5004662307117,
+                636.3494653301641
+            ]
+        }
+    ],
+    "configuration": {
+        "num_sample": 50,
+        "output_types": [
+            "mean",
+            "quantiles",
+            "samples"
+        ],
+        "quantiles": [
+            "0.1",
+            "0.9"
+        ]
+    }
+},
+
+{
+    "ErrorCode": "CLIENT_ERROR_FROM_MODEL",
+    "LogStreamArn": "arn:aws:logs:us-east-1:799365443517:log-group:/aws/sagemaker/Endpoints/synth1",
+    "Message": "Received client error (400) from primary with message \"Invalid request: [{'num_samples': 50, 'output_types': ['mean', 'quantiles', 'samples'], 'quantiles': ['0.1', '0.9']}] is not of type 'object'\n\nFailed validating 'type' in schema['properties']['configuration']:\n    {'additionalProperties': False,\n     'properties': {'num_samples': {'type': 'integer'},\n                    'output_types': {'items': {'type': 'string'},\n                                     'minItems': 1,\n                                     'type': 'array',\n                                     'uniqueItems': True},\n                    'quantiles': {'items': {'type': 'string'},\n                                  'minItems': 1,\n                                  'type': 'array',\n                                  'uniqueItems': True}},\n     'type': 'object'}\n\nOn instance['configuration']:\n    [{'num_samples': 50,\n      'output_types': ['mean', 'quantiles', 'samples'],\n      'quantiles': ['0.1', '0.9']}]\". See https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEventViewer:group=/aws/sagemaker/Endpoints/synth1 in account 799365443517 for more information.",
+    "OriginalMessage": "Invalid request: [{'num_samples': 50, 'output_types': ['mean', 'quantiles', 'samples'], 'quantiles': ['0.1', '0.9']}] is not of type 'object'\n\nFailed validating 'type' in schema['properties']['configuration']:\n    {'additionalProperties': False,\n     'properties': {'num_samples': {'type': 'integer'},\n                    'output_types': {'items': {'type': 'string'},\n                                     'minItems': 1,\n                                     'type': 'array',\n                                     'uniqueItems': True},\n                    'quantiles': {'items': {'type': 'string'},\n                                  'minItems': 1,\n                                  'type': 'array',\n                                  'uniqueItems': True}},\n     'type': 'object'}\n\nOn instance['configuration']:\n    [{'num_samples': 50,\n      'output_types': ['mean', 'quantiles', 'samples'],\n      'quantiles': ['0.1', '0.9']}]",
+    "OriginalStatusCode": 400
+},
+
+{'num_samples': 50, 'output_types': ['mean', 'quantiles', 'samples'
+    ], 'quantiles': ['0.1', '0.9'
+    ]
+}
+] is not of type 'object'\n\nFailed validating 'type' in schema['properties'
+]['configuration'
+]:\n    {'additionalProperties': False,\n     'properties': {'num_samples': {'type': 'integer'
+    },\n                    'output_types': {'items': {'type': 'string'
+        },\n                                     'minItems': 1,\n                                     'type': 'array',\n                                     'uniqueItems': True
+    },\n                    'quantiles': {'items': {'type': 'string'
+        },\n                                  'minItems': 1,\n                                  'type': 'array',\n                                  'uniqueItems': True
+    }
+},\n     'type': 'object'
+}\n\nOn instance['configuration'
+]:\n    [
+{'num_samples': 50,\n      'output_types': ['mean', 'quantiles', 'samples'
+    ],\n      'quantiles': ['0.1', '0.9'
+    ]
+}
+]\". See https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEventViewer:group=/aws/sagemaker/Endpoints/synth1 in account 799365443517 for more information.",

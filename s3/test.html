@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<body>
+    <h1>message for server</h1>
+    <form>
+        <!-- <input type="text" name="inputString"/> -->
+<!-- <button type="button" onclick="sendMessage()">Submit</button>
+    </form>
+
+    <h1>message from server</h1>
+    <p style="width: 500px; border-width: 1px;" id="messages"></p>
+
+    <script>
+        // let connection = new WebSocket("wss://o74vkm3sl5.execute-api.us-east-1.amazonaws.com/products");
+
+        let connection = new WebSocket("wss://cryptopanic.com/api/v1/posts/?auth_token=851aab2a93d549b73cdc6e4c731f14cc29b2dfe5&currencies=BTC");
+
+        connection.onopen = function (event) {
+            console.log("Connected: " + JSON.stringify(event));
+        };
+
+        connection.onmessage = function (ms) {
+
+            document.getElementById('messages').innerHTML += ("server massage:" + msg.data + "<br />");
+            console.log("message received");
+        }
+
+        connection.onerror = function (error) {
+            console.log("websocket error: " + JSON.stringify(error));
+
+        }
+
+        function sendMessage() {
+            let mssgText = document.forms[0].inputString.value;
+
+
+            let msgObject = {
+                action: "sendMessage",
+                data: mssgText
+            }
+
+
+            connection.send(JSON.stringify(msgObject));
+
+            console.log("message sent: " + JSON.stringify(msgObject));
+        }
+    </script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Client</title>
+</head>
+
+<body>
+    <h1>Message for Server</h1>
+    <form>
+        <input type="text" name="inputString" />
+        <button type="button" onclick="sendMessage()">Submit</button>
+    </form>
+
+    <h1>Messages from Server</h1>
+    <p style="border-style: solid; width: 500px; border-width: 1px;" id="messages"></p>
+
+    <script>
+        //Open connection
+        let connection = new WebSocket("wss://8l4cwqyls2.execute-api.us-east-1.amazonaws.com/production");
+
+        //Log connected response
+        connection.onopen = function (event) {
+            console.log("Connected: " + JSON.stringify(event));
+        };
+
+        //Output messages from the server
+        connection.onmessage = function (msg) {
+            document.getElementById("messages").innerHTML += ("Server message: " + msg.data + "<br />");
+            console.log("Message received.");
+        }
+
+        //Log errors
+        connection.onerror = function (error) {
+            console.log("WebSocket Error: " + JSON.stringify(error, ["message", "arguments", "type", "name"]));
+        }
+
+        //Send message to server
+        function sendMessage() {
+            //Get text from form
+            let msgText = document.forms[0].inputString.value;
+
+            //Create message to be sent to server
+            let msgObject = {
+                action: "sendMessage",//Used for routing in API Gateway
+                data: msgText
+            };
+
+            //Send message
+            connection.send(JSON.stringify(msgObject));
+
+            //Log result
+            console.log("Message sent: " + JSON.stringify(msgObject));
+        }
+
+
+    </script>
+</body>
+
+</html>
