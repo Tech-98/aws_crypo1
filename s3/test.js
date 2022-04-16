@@ -20,14 +20,14 @@ connection.onerror = function (error) {
 }
 
 //Send message to server
-function sendMessage() {
+function sendBitcoin() {
     //Get text from form
     let msgText = document.forms[0].inputString.value;
 
     //Create message to be sent to server
     let msgObject = {
         action: "sendMessage",//Used for routing in API Gateway
-        data: msgText
+        data: "bitcoin"
     };
 
     //Send message

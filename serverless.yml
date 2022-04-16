@@ -136,7 +136,7 @@ functions:
           method: get
     role: arn:aws:iam::799365443517:role/LabRole
   listprod:
-    handler: src/handlers.listProduct
+    handler: src/websocket.listProd
     events:
       - websocket:
           route: $connect

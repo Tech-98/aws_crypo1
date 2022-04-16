@@ -342,31 +342,44 @@ export const deleteProduct = async (event: APIGatewayProxyEvent): Promise<APIGat
 };
 
 export const listProduct = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
- 
-  const output = await docClient
+if (typeof event.body == "undefined"){
+  event.body = "test";
+}
+  let output = await docClient
     .scan({
       TableName: tableName,
       FilterExpression: "currency = :a",
-    ExpressionAttributeValues: {
-        ":a": "bitcoin"
-    }
+      ExpressionAttributeValues: {
+        ":a": event.body
+      }
     })
     .promise();
-var data = output.Items;
+  var prices = [];
+  if (output.Items) {
+    let data = output?.Items;
+    for (let i = 0; i < data.length; i++) {
+      console.log(output.Items[i]);
 
+      prices[i] = Number(data[i].price);
+      //Store save data promise in array
+
+    }
+  }
+  // event.body
 
   return {
     statusCode: 200,
     headers,
-    body: JSON.stringify(output.Items)
+    body: JSON.stringify(prices)
     // body: JSON.stringify("message received")
   };
-};
-    // console.log(event);
-    // return{
-    //     'statusCode': 200,
-    //     'body': JSON.stringify(event["requestContext"].get("connectionId"))
-    // }
+
+
+};   // console.log(event);
+// return{
+//     'statusCode': 200,
+//     'body': JSON.stringify(event["requestContext"].get("connectionId"))
+// }
 // export class DataDownloader {
 //   url;
 //   dataDownloader: any;

@@ -80,7 +80,7 @@
         //Output messages from the server
         connection.onmessage = function (msg) {
             document.getElementById("messages").innerHTML += ("Server message: " + msg.data + "<br />");
-            console.log("Message received.");
+            console.log("Message received."+ msg.data);
         }
 
         //Log errors
@@ -100,7 +100,10 @@
             };
 
             //Send message
-            connection.send(JSON.stringify(msgObject));
+            // connection.send(JSON.stringify(msgObject));
+
+            connection.send(msgText);
+
 
             //Log result
             console.log("Message sent: " + JSON.stringify(msgObject));

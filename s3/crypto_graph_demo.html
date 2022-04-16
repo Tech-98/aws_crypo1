@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crytpocurrency Graph Demo</title>
+
+    <!-- Include Plotly JavaScript library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Include function that generates random crypto data -->
+    <script src="currency_data.js"></script>
+</head>
+<body>
+
+    <!-- Create DIVs to hold the charts -->
+    <div id="cryptoDiv" style="width:800px;height:600px;"></div>
+    <!-- <div id="ethereumDiv" style="width:800px;height:400px;"></div> -->
+    <!-- <div id="litecoinDiv" style="width:800px;height:400px;"></div> -->
+    <!-- <div id="tronDiv" style="width:800px;height:400px;"></div> -->
+
+    <!-- <script>
+        
+    </script> -->
+    <button type="button" onclick="reqData('ethereum')">Ethereum</button>
+    <button type="button" onclick="reqData('bitcoin')">Bitcoin</button>
+    <button type="button" onclick="reqData('litecoin')">Litecoin</button>
+    <button type="button" onclick="reqData('monero')">Monero</button>
+    <button type="button" onclick="reqData('tether')">Tether</button>
+</body>
+</html>
+
