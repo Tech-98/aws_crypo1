@@ -4,6 +4,7 @@ import { ObjectType } from "aws-sdk/clients/clouddirectory";
 import { Json } from "aws-sdk/clients/robomaker";
 import { privateEncrypt } from "crypto";
 const tableName = "cryptoData";
+const tableTweet = "tweet"
 const docClient = new AWS.DynamoDB.DocumentClient();
 const ENDPOINT = '8l4cwqyls2.execute-api.us-east-1.amazonaws.com/production'
 const client = new AWS.ApiGatewayManagementApi({endpoint: ENDPOINT})
@@ -50,6 +51,39 @@ const sendToAll =async (ids:any,body:any) => {
   return Promise.all(all);
 };
 
+
+const filterTweet =async (output:any) => {
+  let sentiment = {
+    positive:0,
+    negative:0,
+    neutral:0
+  };
+let count;
+    // let data = JSON.parse(output.Items);
+  if (output.Items) {
+    let data = output?.Items;
+    for (let i = 0; i < data.length; i++) {
+      console.log(output.Items[i]);
+
+      if(data[i].sentiment == "NEUTRAL"){
+        sentiment.neutral = sentiment.neutral + 1;
+      }else if(data[i].sentiment == "POSITIVE"){
+        sentiment.positive = sentiment.positive +1;
+      }else if(data[i].sentiment == "NEGATIVE"){
+        sentiment.negative = sentiment.negative +1;
+        // sentiment.negative=data.length;
+      }
+      // prices[i] = {price: Number(data[i].price), ts: data[i].cryptoTimestamp};
+      // prices[i] = Number(data[i].price);
+      //Store save data promise in array
+
+      
+    }
+  }
+
+  return sentiment;
+}
+
 export const listProd = async (event: any, context: any): Promise<APIGatewayProxyResult> => {
   
 
@@ -83,6 +117,15 @@ export const listProd = async (event: any, context: any): Promise<APIGatewayProx
       }
     })
     .promise();
+    let outputTweet = await docClient
+    .scan({
+      TableName: tableTweet,
+      FilterExpression: "currency = :a",
+      ExpressionAttributeValues: {
+        ":a": event.body
+      }
+    })
+    .promise();
   var prices = [];
 
   
@@ -106,9 +149,13 @@ export const listProd = async (event: any, context: any): Promise<APIGatewayProx
     prices = ["sent to all"];
   }
 
+  let sentiment =await filterTweet(outputTweet);
   return {
     statusCode: 200,
-    body: JSON.stringify(prices)
+    body: JSON.stringify({
+      price: prices,
+      tweet: sentiment
+    })
     // body: JSON.stringify("message received")
   };
 

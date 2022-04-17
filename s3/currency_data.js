@@ -6,6 +6,7 @@ let numTimeIntervals = 100;
 
 var price = [];
 var ts = [];
+var tweet;
 const currencyData = [{ name: "bitcoin", x: [], y: [] }]
 
 let connection = new WebSocket("wss://8l4cwqyls2.execute-api.us-east-1.amazonaws.com/production");
@@ -14,13 +15,20 @@ let connection = new WebSocket("wss://8l4cwqyls2.execute-api.us-east-1.amazonaws
 connection.onopen = function (event) {
     console.log("Connected: " + JSON.stringify(event));
     sendMessage("bitcoin");
+
 };
 
 //Output messages from the server
 connection.onmessage = function (msg) {
 
     //  data = JSON.stringify(msg.data);
-    data = JSON.parse(msg.data);
+    let result = JSON.parse(msg.data);
+    data = result.price
+    
+    tweet = result.tweet;
+    console.log("positive:" +tweet.positive);
+    console.log("negative:" +tweet.negative);
+    console.log("neutral:" +tweet.neutral);
 
     data.sort((a, b) => (a.ts > b.ts) ? 1 : ((b.ts > a.ts) ? -1 : 0))
     let count = 0
@@ -33,18 +41,15 @@ connection.onmessage = function (msg) {
         ts[count] = new Date(Number(i.ts));
         // ts[count] = Number(i.ts);
 
-        console.log("index:" + count + "price:" + price[count] + "ts:" + ts[count]);
+        // console.log("index:" + count + "price:" + price[count] + "ts:" + ts[count]);
 
         count++
     })
 
     console.log(count);
     console.log("lenght: " + data.lenght);
-    // for(i = 0 ; i < msg.data.lenght ) {
-    //     console.log("price:" +i.price +"ts:" +i.ts);
-    //     price[]
-    // })
-    console.log("data:" + JSON.stringify(msg.data));
+
+    // console.log("data:" + JSON.stringify(msg.data));
     console.log("-------------------------")
 
 }
@@ -54,19 +59,19 @@ connection.onerror = function (error) {
     console.log("WebSocket Error: " + JSON.stringify(error, ["message", "arguments", "type", "name"]));
 }
 
-function sort(arr) {
+// function sort(arr) {
 
-    let temp;
-    let tempsmall;
-    let arrayData = [];
+//     let temp;
+//     let tempsmall;
+//     let arrayData = [];
 
-    while (j > tempsmall && j < temp)
-        for (i = 0; i < arr.lenght; i++) {
+//     while (j > tempsmall && j < temp)
+//         for (i = 0; i < arr.lenght; i++) {
 
 
-        }
-    return arrayData;
-}
+//         }
+//     return arrayData;
+// }
 
 //Send message to server
 function sendMessage(msgText) {
