@@ -4,6 +4,7 @@ let timeInterval = 1000;
 //Number of data points to generate
 let numTimeIntervals = 100;
 
+// these date has been generated using aws sagemaker
 const bitcoinPrediction = [43850.98828125, 46854.0703125, 46387.890625, 46166.3984375, 46241.73046875, 45969.13671875, 44735.96484375, 45469.19921875, 44923.984375, 45191.5859375, 45050.01953125, 45173.12109375, 45419.49609375, 45232.1953125, 45412.78125, 45186.48828125, 45467.078125, 45875.9765625, 46285.88671875, 45751.578125, 46471.48828125, 47246.4453125, 47527.484375, 48243.078125, 48368.51953125, 47891.25390625, 47903.17578125, 48437.484375, 49228.87109375, 49870.11328125, 49656.30078125, 48906.8359375, 48875.3203125, 48498.140625, 48652.05859375, 48881.890625, 48702.4609375, 48759.07421875, 48943.05859375, 49043.71484375, 49056.78125, 49459.5703125, 49750.0390625, 49594.390625, 50123.578125, 50354, 51029.953125, 51634.08984375, 51838.78125, 51720.87109375];
 
 const ethereumPrediction = [4159.2309570312, 4101.322265625, 4064.1064453125, 3916.9553222656, 3812.09375, 3781.201171875, 3764.6682128906, 3837.6508789062, 3861.0512695312, 3869.8696289062, 3916.0578613281, 3898.4663085938, 3910.8522949219, 3961.2800292969, 3950.5107421875, 3916.3928222656, 3908.3984375, 3903.9118652344, 4564.5551757812, 4752.2875976562, 4532.3247070312, 4386.3149414062, 4259.7143554688, 4206.2392578125, 4191.833984375, 4224.4755859375, 4217.298828125, 4047.841796875, 3918.9204101562, 3825.0671386719, 3766.7592773438, 3862.5891113281, 3899.0349121094, 3895.8674316406, 3893.9150390625, 3898.5578613281, 3918.8820800781, 3917.4353027344, 3934.1538085938, 3915.525390625, 3906.9475097656, 3898.4147949219, 3329.0249023438, 4674.9379882812, 5887.4682617188, 4753.2841796875, 4390.943359375, 4164.0053710938, 4122.0107421875, 4236.7607421875];
@@ -27,24 +28,19 @@ let connection = new WebSocket("wss://8l4cwqyls2.execute-api.us-east-1.amazonaws
 connection.onopen = function (event) {
     console.log("Connected: " + JSON.stringify(event));
     sendMessage("bitcoin");
+    plotData();
 
 };
 
 //Output messages from the server
 connection.onmessage = function (msg) {
 
-    //  data = JSON.stringify(msg.data);
     let result = JSON.parse(msg.data);
     data = result.price
     newsApi = result.news
     tweet = result.tweet;
+    console.log("crypto_data length" + result.price.length);
 
-
-
-    // console.log("news" + newsApi[0].title);
-    // console.log("positive:" + tweet.positive);
-    // console.log("negative:" + tweet.negative);
-    // console.log("neutral:" + tweet.neutral);
 
     data.sort((a, b) => (a.ts > b.ts) ? 1 : ((b.ts > a.ts) ? -1 : 0))
     let count = 0
@@ -52,20 +48,12 @@ connection.onmessage = function (msg) {
     ts = [];
     data.forEach(i => {
 
-        // index = Number(i.ts)-1586131200000;
         price[count] = Number((i.price));
         ts[count] = new Date(Number(i.ts));
-        // ts[count] = Number(i.ts);
-        // console.log(price);
-        // console.log("index:" + count + "price:" + price[count] + "ts:" + ts[count]);
 
         count++
     })
 
-    console.log(price);
-    console.log("lenght: " + data.lenght);
-
-    // console.log("data:" + JSON.stringify(msg.data));
     console.log("-------------------------")
 
     plotData();
@@ -104,8 +92,8 @@ function sendMessage(msgText) {
     plotPred(msgText);
 
 }
-//Add dummy data for four currencies
 
+// plote graph for predictions
 function getPrediction(predictionData) {
     let date = new Date();
     let tempDate = new Date();
@@ -113,10 +101,9 @@ function getPrediction(predictionData) {
     for (let i = 0; i < predictionData.length; i++) {
         tempDate = date;
         date.setDate(date.getDate() + 1);
-        // tempDate = date;
 
         predictionX.push(new Date(date))
-        // console.log("i:" + i + "|" + predictionX[i]);
+
     }
 
     currencyData[0].x = predictionX;
@@ -127,10 +114,8 @@ function getPrediction(predictionData) {
 }
 function getCurrencyData() {
 
-    //Create Date class so we can obtain a starting timestamp
-    let date = new Date();
 
-    //Starting point for generation of data
+    let date = new Date();
     let startTimestamp = date.getTime();
 
     currencyData[0].y = price;
@@ -145,7 +130,6 @@ function reqData(msgText) {
     sendMessage(msgText)
     plotData();
     plotPred(msgText);
-    // console.log("sent");
 
 
 }
@@ -331,11 +315,8 @@ function plotData() {
 
         var layout1 = {
             title: "Sentiment analysis",
-            // color: 'rgb(21, 64, 82)',
             paper_bgcolor: 'rgb(0,0,0,0)',
             showlegend: false
-            // height: 400,
-            // width: 500
 
         };
 
@@ -346,9 +327,3 @@ function plotData() {
 
 }
 
-//Plot data when window first loads
-// window.onload = plotData;
-// window.onload = sendMessage("bitcoin");
-
-//Replot data every 1000 ms.
-// setInterval(plotData, 1000);
