@@ -1,0 +1,48 @@
+body {
+    background-image: none;
+    background-color: #ebebeb;
+}
+
+
+.float-child {
+    /* width: 50%; */
+    float: left;
+    /* padding: 20px; */
+    /* border: 2px solid red; */
+}
+
+.float-child-right {
+    /* width: 50%; */
+    float: right;
+    /* padding: 20px; */
+    /* border: 2px solid red; */
+}
+
+
+
+.btn-group button {
+    background-color: #292929;
+    /* Green background */
+    /* border: 1px solid green; */
+    /* Green border */
+    color: white;
+    /* White text */
+    padding: 10px 24px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    width: 100%;
+    /* Set a width if needed */
+    display: block;
+    /* Make the buttons appear below each other */
+}
+
+.btn-group button:not(:last-child) {
+    border-bottom: none;
+    /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #3e8e41;
+}

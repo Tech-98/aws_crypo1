@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Crytpocurrency Graph Demo</title>
@@ -9,23 +10,53 @@
 
     <!-- Include function that generates random crypto data -->
     <script src="currency_data.js"></script>
+
 </head>
+
+<!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+<!-- <link href="css/all.css" rel="stylesheet"> -->
+<link href="main.css" rel="stylesheet">
+<!-- <link href="css/toastr.css" rel="stylesheet"> -->
+
 <body>
 
-    <!-- Create DIVs to hold the charts -->
-    <div id="cryptoDiv" style="width:800px;height:600px;"></div>
-    <!-- <div id="ethereumDiv" style="width:800px;height:400px;"></div> -->
-    <!-- <div id="litecoinDiv" style="width:800px;height:400px;"></div> -->
-    <!-- <div id="tronDiv" style="width:800px;height:400px;"></div> -->
+    <!-- <div class="btn-group">
+        <button>Apple</button>
+        <button>Samsung</button>
+        <button>Sony</button>
+    </div> -->
 
-    <!-- <script>
+    <div class="float-container">
+        <div class="float-child btn-group">
+            <button class="button" type="button" onclick="reqData('ethereum')">Ethereum</button>
+            <button class="button" type="button" onclick="reqData('bitcoin')">Bitcoin</button>
+            <button class="button" type="button" onclick="reqData('litecoin')">Litecoin</button>
+            <button class="button" type="button" onclick="reqData('monero')">Monero</button>
+            <button class="button" type="button" onclick="reqData('tether')">Tether</button>
+        </div>
+
+        <div id="cryptoDiv" class="float-child" style="width:55%;height:600px;"></div>
+        <div id="news" class="float-child-right" style="background-color:rgb(168, 168, 168); width:35%; height:95vh;">
+            news
+        </div>
+    </div>
+
+    </div>
+    <div id="sentimentDiv" class="float-child" style=" width:350px;"></div>
+
+    <div id="pred" class="float-child" style="background-color:rgb(226, 226, 226); width:40%; height:350px;">
+
+        <!-- Create DIVs to hold the charts -->
+
+        <!-- <div id="ethereumDiv" style="width:800px;height:400px;"></div> -->
+        <!-- <div id="litecoinDiv" style="width:800px;height:400px;"></div> -->
+        <!-- <div id="tronDiv" style="width:800px;height:400px;"></div> -->
+
+        <!-- <script>
         
     </script> -->
-    <button type="button" onclick="reqData('ethereum')">Ethereum</button>
-    <button type="button" onclick="reqData('bitcoin')">Bitcoin</button>
-    <button type="button" onclick="reqData('litecoin')">Litecoin</button>
-    <button type="button" onclick="reqData('monero')">Monero</button>
-    <button type="button" onclick="reqData('tether')">Tether</button>
-</body>
-</html>
 
+
+</body>
+
+</html>
