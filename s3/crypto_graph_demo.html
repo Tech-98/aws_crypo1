@@ -26,33 +26,59 @@
         <button>Sony</button>
     </div> -->
 
-    <div class="float-container">
-        <div class="float-child btn-group">
-            <button class="button" type="button" onclick="reqData('ethereum')">Ethereum</button>
-            <button class="button" type="button" onclick="reqData('bitcoin')">Bitcoin</button>
-            <button class="button" type="button" onclick="reqData('litecoin')">Litecoin</button>
-            <button class="button" type="button" onclick="reqData('monero')">Monero</button>
-            <button class="button" type="button" onclick="reqData('tether')">Tether</button>
-        </div>
+    <div class="float-child" style=" width:8%;height: 600px;">
 
-        <div id="cryptoDiv" class="float-child" style="width:55%;height:600px;"></div>
-        <div id="news" class="float-child-right" style="background-color:rgb(168, 168, 168); width:35%; height:95vh;">
-            news
+        <div class="btn-container">
+            <div class="float-child btn-group" style=" ">
+                <button class="button" type="button" onclick="reqData('ethereum')">Ethereum</button>
+                <button class="button" type="button" onclick="reqData('bitcoin')">Bitcoin</button>
+                <button class="button" type="button" onclick="reqData('litecoin')">Litecoin</button>
+                <button class="button" type="button" onclick="reqData('monero')">Monero</button>
+                <button class="button" type="button" onclick="reqData('tether')">Tether</button>
+            </div>
+
+
         </div>
+    </div>
+    <div id="cryptoDiv" class="float-child" style="width:62%;height:600px;"></div>
+    <div id="sentimentDiv" class="float-child" style=" width:30%;"></div>
+
+
     </div>
 
     </div>
-    <div id="sentimentDiv" class="float-child" style=" width:350px;"></div>
+    <div>
 
-    <div id="pred" class="float-child" style="background-color:rgb(226, 226, 226); width:40%; height:350px;">
 
-        <!-- Create DIVs to hold the charts -->
+        <div class="float-child" style="background-color:rgba(226, 226, 226, 0.205); width:65%; height:35vh;">
+            <div id="newsTitle">
+                Top News
+            </div>
+            <div id="news" style=" height:32vh;">
 
-        <!-- <div id="ethereumDiv" style="width:800px;height:400px;"></div> -->
-        <!-- <div id="litecoinDiv" style="width:800px;height:400px;"></div> -->
-        <!-- <div id="tronDiv" style="width:800px;height:400px;"></div> -->
+            </div>
+        </div>
 
-        <!-- <script>
+        <div id="pred" class="float-child-right"
+            style="background-color:rgba(226, 226, 226, 0.178); width:35%; height:35vh;">
+            <div id="newsTitle">
+                Prediction
+            </div>
+            <div id="predDiv" style="background-color:rgba(230, 230, 230, 0); height:32vh;">
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Create DIVs to hold the charts -->
+
+    <!-- <div id="ethereumDiv" style="width:800px;height:400px;"></div> -->
+    <!-- <div id="litecoinDiv" style="width:800px;height:400px;"></div> -->
+    <!-- <div id="tronDiv" style="width:800px;height:400px;"></div> -->
+
+    <!-- <script>
         
     </script> -->
 

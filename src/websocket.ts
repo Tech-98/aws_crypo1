@@ -48,6 +48,63 @@ const filterTweet = async (output: any) => {
   return sentiment;
 }
 
+const newsApi = async (currency: any) => {
+
+  var crypto = currency;
+  var result: { title: any; url: any; time: any; }[] = [];
+  if (currency == "bitcoin") {
+    crypto = "BTC"
+  } else if (currency == "ethereum") {
+    crypto = "ETH"
+  } else if (currency == "litecoin") {
+    crypto = "LTC"
+  } else if (currency == "monero") {
+    crypto = "XMR"
+  } else if (currency == "tether") {
+    crypto = "USDT"
+  } else {
+    crypto = "invalid"
+  }
+  const config = {
+    method: 'get',
+    url: 'https://cryptopanic.com/api/v1/posts/?auth_token=8c70f987d75a880f7a9224ccbd0f0a509394bb6c&currencies=' + crypto
+  }
+
+  let url = 'https://cryptopanic.com/api/v1/posts/?auth_token=8c70f987d75a880f7a9224ccbd0f0a509394bb6c&currencies=' + crypto;
+
+
+  if (crypto == "invalid") {
+    result = [{ title: "empty", url: "", time: "" }];
+  } else {
+    let res = await axios.get(
+      url,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      },
+    );
+
+    let data = res.data.results;
+
+    // 
+
+    data.forEach((output: any) => {
+
+      let newsObj = {
+        title: output.title,
+        url: output.url,
+        time: output.published_at
+      }
+      result.push(newsObj);
+
+    });
+  }
+  // console.log(res.status);
+
+  return result;
+}
+
 const sendToOne = async (id: any, body: any) => {
 
   let output = await docClient
@@ -69,6 +126,8 @@ const sendToOne = async (id: any, body: any) => {
     })
     .promise();
   let sentiment = await filterTweet(outputTweet);
+  let cryptoNews = await newsApi(body);
+
   var prices = [];
 
 
@@ -87,7 +146,7 @@ const sendToOne = async (id: any, body: any) => {
     await client.postToConnection({
 
       'ConnectionId': id,
-      'Data': Buffer.from(JSON.stringify({ price: prices, tweet: sentiment }))
+      'Data': Buffer.from(JSON.stringify({ price: prices, tweet: sentiment, news: cryptoNews }))
       // 'Data': Buffer.from(JSON.stringify(body))
     }).promise();
   } catch (e) {
@@ -102,58 +161,7 @@ const sendToAll = async (ids: any, body: any) => {
 
 
 
-const newsApi = async (currency: any) => {
 
-  var crypto = currency;
-  if (currency == "bitcoin") {
-    crypto = "BTC"
-  } else if (currency == "ethereum") {
-    crypto = "BTC"
-  } else if (currency == "litecoin") {
-    crypto = "BTC"
-  } else if (currency == "monero") {
-    crypto = "BTC"
-  } else if (currency == "tether") {
-    crypto = "BTC"
-  } else {
-    crypto = "invalid"
-  }
-  const config = {
-    method: 'get',
-    url: 'https://cryptopanic.com/api/v1/posts/?auth_token=8c70f987d75a880f7a9224ccbd0f0a509394bb6c&currencies=' + crypto
-  }
-
-  let url = 'https://cryptopanic.com/api/v1/posts/?auth_token=8c70f987d75a880f7a9224ccbd0f0a509394bb6c&currencies=' + crypto;
-  let res = await axios.get(
-    url,
-    {
-      headers: {
-        Accept: 'application/json',
-      },
-    },
-  );
-
-  let data = res.data.results;
-
-  let result: { title: any; url: any; time: any; }[] = [];
-
-  data.forEach((output: any) => {
-
-    let newsObj = {
-      title: output.title,
-      url: output.url,
-      time: output.published_at
-    }
-    result.push(newsObj);
-
-  });
-
-  // console.log(res.status);
-  // if (crypto == "invalid") {
-  //   data = "empty";
-  // }
-  return result;
-}
 
 
 export const listProd = async (event: any, context: any): Promise<APIGatewayProxyResult> => {
@@ -214,6 +222,8 @@ export const listProd = async (event: any, context: any): Promise<APIGatewayProx
 
     }
   }
+
+  // prices.sort();
   // event.body
 
   if (event.body == "update") {

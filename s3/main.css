@@ -1,6 +1,6 @@
 body {
     background-image: none;
-    background-color: #ebebeb;
+    background-color: #000000;
 }
 
 
@@ -21,7 +21,7 @@ body {
 
 
 .btn-group button {
-    background-color: #292929;
+    background-color: #29292900;
     /* Green background */
     /* border: 1px solid green; */
     /* Green border */
@@ -35,6 +35,23 @@ body {
     /* Set a width if needed */
     display: block;
     /* Make the buttons appear below each other */
+    /* background-color: #4CAF50; */
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.btn-container {
+
+    position: relative;
+    left: 0px;
+    top: 150px;
 }
 
 .btn-group button:not(:last-child) {
@@ -44,5 +61,61 @@ body {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: #3e8e41;
+    background-color: #8585856c;
+}
+
+#news {
+    /* height: 200px; */
+    overflow: scroll;
+    scrollbar-color: rgb(0, 0, 0) rgba(255, 255, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000;
+    padding: 10px 15px;
+}
+
+.newsline {
+    color: #292929;
+    text-decoration-color: #292929;
+}
+
+.newsDiv:hover {
+    /* color: aliceblue; */
+    background-color: rgba(131, 131, 131, 0.103);
+}
+
+a:link,
+a:visited {
+    /* background-color: #f4433600; */
+    color: rgb(255, 255, 255);
+    /* padding: 10px; */
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a:hover,
+a:active {
+    /* background-color: rgba(99, 99, 99, 0.144); */
+    color: rgb(255, 255, 255);
+}
+
+#newsTitle {
+    font-family: 'Courier New',
+        Courier,
+        monospace;
+    color: #ffffff;
+    padding: 5px 15px;
+    /* background-color: #ffffff70; */
+    text-align: center;
+}
+
+.scrollable-element {
+    scrollbar-color: rgb(0, 0, 0);
+}
+
+[data-darkreader-inline-fill] {
+    fill: black;
 }
